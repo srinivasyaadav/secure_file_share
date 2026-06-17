@@ -1,7 +1,7 @@
 // Environment configuration for cross-platform compatibility - Cache bust v2
 const config = {
   development: {
-    serverUrl: 'http://localhost:5002',
+    serverUrl: process.env.REACT_APP_API_URL || 'http://localhost:5002',
     cloudinaryCloudName: 'dzngaquws',
     cloudinaryUploadPreset: 'ml_default'
   },
