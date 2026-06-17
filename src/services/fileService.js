@@ -2,8 +2,6 @@ import axios from "axios";
 import getConfig from "../config/environment";
 
 const config = getConfig();
-const CLOUDINARY_URL = `https://api.cloudinary.com/v1_1/${config.cloudinaryCloudName}/upload`;
-const UPLOAD_PRESET = config.cloudinaryUploadPreset;
 const SERVER_URL = config.serverUrl;
 
 export const uploadToCloudinary = async (file, code) => {

@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Upload, Star, Clock, Download, File, MoreVertical, HardDrive, Zap, Home, User, Settings } from "lucide-react";
+import { Upload, Clock, Download, File, MoreVertical, HardDrive, Zap, Home, User, Settings } from "lucide-react";
 import { uploadToCloudinary, registerUpload, getFilesByCode } from "../services/fileService";
-import api from "../services/api";
 import HomePage from "./HomePage";
 import QRCode from 'qrcode';
 import { BrowserMultiFormatReader } from '@zxing/library';
@@ -28,6 +27,8 @@ const MainApp = ({ onLogout }) => {
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [isDragActive, setIsDragActive] = useState(false);
+
+  // eslint-disable-next-line no-unused-vars
   const [isQRScanOpen, setIsQRScanOpen] = useState(false);
   const [qrCodeData, setQrCodeData] = useState('');
   const [qrCodeImage, setQrCodeImage] = useState(() => {
@@ -39,9 +40,6 @@ const MainApp = ({ onLogout }) => {
   const codeReader = useRef(null);
   const [textContent, setTextContent] = useState('');
   const [isTextUploadOpen, setIsTextUploadOpen] = useState(false);
-
-  const calculateFileSizeMB = (files) =>
-    files.reduce((t, f) => t + f.size / (1024 * 1024), 0);
 
   const getStoragePercentage = () => {
     const maxStorageMB = cloudinaryStorage.limitGB * 1024;
@@ -76,6 +74,7 @@ const MainApp = ({ onLogout }) => {
     alert('✅ All storage cleared successfully!');
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     fetchCloudinaryStorage();
     
@@ -106,7 +105,7 @@ const MainApp = ({ onLogout }) => {
       // Clear URL parameter
       window.history.replaceState({}, '', window.location.pathname);
     }
-  }, []);
+  }, []); // fetchCloudinaryStorage intentionally not included - it updates on upload
 
   const handleUpload = async () => {
     console.log("Upload button clicked, files:", uploadFiles);
@@ -257,6 +256,7 @@ const MainApp = ({ onLogout }) => {
     }
   };
 
+  // eslint-disable-next-line no-unused-vars
   const handleRetrieve = async () => {
     if (!retrieveCode) return alert("Please enter an access code!");
 
@@ -312,6 +312,7 @@ const MainApp = ({ onLogout }) => {
     }
   };
 
+  // eslint-disable-next-line no-unused-vars
   const handleDeleteRecent = (file) => {
     setRecentFiles((r) => r.filter((it) => it.url !== file.url));
   };
@@ -682,6 +683,7 @@ const MainApp = ({ onLogout }) => {
     </div>
   );
 
+  // eslint-disable-next-line no-unused-vars
   const QRScanModal = () => (
     <div className="modal">
       <div className="modal-content qr-scan-modal">
